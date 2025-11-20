@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Simple Clean Calculator</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #bfa084; 
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+    }
+
+    .calc {
+        width: 320px;
+        background: #3e2f25;
+        padding: 20px;
+        border-radius: 20px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    }
+
+    #screen {
+        width: calc(100% - 4px); 
+        height: 70px;
+        font-size: 28px;
+        padding: 14px;
+        border: 2px solid #b89a82; 
+        border-radius: 15px;
+        margin-bottom: 20px;
+        background: #d7c4b2;
+        color: #3e2f25;
+        text-align: right;
+        overflow: hidden;
+        white-space: nowrap;
+        box-sizing: border-box; 
+    }
+
+    .buttons {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+    }
+
+    button {
+        height: 55px;
+        font-size: 20px;
+        font-weight: bold;
+        border: none;
+        border-radius: 14px;
+        background: #5b4636; 
+        color: white;
+        cursor: pointer;
+        transition: 0.15s;
+    }
+
+    button:hover {
+        background: #4a392d;
+    }
+
+    button:active {
+        transform: scale(0.96);
+    }
+
+    .op {
+        background: #8c5f3f; 
+    }
+    .op:hover {
+        background: #754e34;
+    }
+
+    .clear {
+        background: #a14935; 
+    }
+    .clear:hover {
+        background: #873827;
+    }
+
+    .equal {
+        background: #6f4e37; 
+        grid-column: span 2;
+    }
+    .equal:hover {
+        background: #5d402f;
+    }
+</style>
+</head>
+<body>
+
+<div class="calc">
+    <input type="text" id="screen" disabled placeholder="0">
+
+    <div class="buttons">
+        <button class="clear" onclick="clearScreen()">C</button>
+        <button class="op" onclick="press('/')">÷</button>
+        <button class="op" onclick="press('*')">×</button>
+        <button class="op" onclick="press('-')">−</button>
+
+        <button onclick="press('7')">7</button>
+        <button onclick="press('8')">8</button>
+        <button onclick="press('9')">9</button>
+        <button class="op" onclick="press('+')">+</button>
+
+        <button onclick="press('4')">4</button>
+        <button onclick="press('5')">5</button>
+        <button onclick="press('6')">6</button>
+
+        <button onclick="press('1')">1</button>
+        <button onclick="press('2')">2</button>
+        <button onclick="press('3')">3</button>
+
+        <button onclick="press('0')">0</button>
+        <button onclick="press('.')">.</button>
+
+        <button class="equal" onclick="calculate()">=</button>
+    </div>
+</div>
+
+<script>
+let screen = document.getElementById("screen");
+
+function press(n) {
+    screen.value += n;
+}
+
+function clearScreen() {
+    screen.value = "";
+}
+
+function calculate() {
+    try {
+        let result = eval(screen.value);
+        screen.value = result;
+    } catch {
+        screen.value = "Error";
+    }
+}
+</script>
+
+</body>
+</html>
